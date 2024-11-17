@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios en JavaScript</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Función para detectar si una cadena es un palíndromo
+        function esPalindromo() {
+            const cadena = document.getElementById("palindromoInput").value.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+            const invertida = cadena.split('').reverse().join('');
+            const resultado = cadena === invertida ? "Es un palíndromo" : "No es un palíndromo";
+            document.getElementById("palindromoResultado").textContent = resultado;
+        }
+
+        // Función para determinar cuál número es mayor
+        function mayorNumero() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            let resultado = "";
+
+            if (num1 > num2) {
+                resultado = `El número mayor es: ${num1}`;
+            } else if (num2 > num1) {
+                resultado = `El número mayor es: ${num2}`;
+            } else {
+                resultado = "Ambos números son iguales";
+            }
+            document.getElementById("mayorNumeroResultado").textContent = resultado;
+        }
+
+        // Función para encontrar vocales en una frase
+        function encontrarVocales() {
+            const frase = document.getElementById("vocalesInput").value.toLowerCase();
+            const vocales = frase.match(/[aeiouáéíóúü]/g) || [];
+            document.getElementById("vocalesResultado").textContent = `Vocales encontradas: ${vocales.join(", ")}`;
+        }
+
+        // Función para contar cuántas veces aparece cada vocal
+        function contarVocales() {
+            const frase = document.getElementById("contarVocalesInput").value.toLowerCase();
+            const conteo = { a: 0, e: 0, i: 0, o: 0, u: 0 };
+            for (let letra of frase) {
+                if (conteo.hasOwnProperty(letra)) {
+                    conteo[letra]++;
+                }
+            }
+            const resultado = `A: ${conteo.a}, E: ${conteo.e}, I: ${conteo.i}, O: ${conteo.o}, U: ${conteo.u}`;
+            document.getElementById("contarVocalesResultado").textContent = resultado;
+        }
+        // Ejercicio 5
+        // Función para mostrar la URL actual en el cuadro de texto
+        window.onload = function () {
+            document.getElementById("urlInput").value = window.location.href;
+        };
+
+        // Función para realizar la petición AJAX
+        function mostrarContenidos() {
+            const url = document.getElementById("urlInput").value;
+            const xhr = new XMLHttpRequest();
+
+            // Actualizar el estado de la petición en tiempo real
+            xhr.onreadystatechange = function () {
+                const estados = [
+                    "No iniciada",
+                    "Cargando",
+                    "Recibida",
+                    "Procesando",
+                    "Completada"
+                ];
+                document.getElementById("estadoPeticion").textContent = `Estado: ${estados[xhr.readyState]}`;
+
+                // Si la petición está completa
+                if (xhr.readyState === 4) {
+                    // Mostrar los contenidos
+                    if (xhr.status === 200) {
+                        document.getElementById("contenidosRespuesta").textContent = xhr.responseText;
+                    } else {
+                        document.getElementById("contenidosRespuesta").textContent = "Error al cargar el contenido.";
+                    }
+
+                    // Mostrar las cabeceras
+                    document.getElementById("cabecerasRespuesta").textContent = xhr.getAllResponseHeaders();
+
+                    // Mostrar el código y texto de estado
+                    document.getElementById("codigoEstado").textContent = `Código: ${xhr.status} - ${xhr.statusText}`;
+                }
+            };
+
+            // Configurar y enviar la petición
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Ejercicios en JavaScript</h1>
+
+    <!-- Ejercicio 1 -->
+    <fieldset>
+        <legend>1. Detectar si es un palíndromo</legend>
+        <input type="text" id="palindromoInput" placeholder="Escribe una cadena">
+        <button onclick="esPalindromo()">Verificar</button>
+        <p id="palindromoResultado"></p>
+    </fieldset>
+
+    <!-- Ejercicio 2 -->
+    <fieldset>
+        <legend>2. Determinar el número mayor</legend>
+        <input type="number" id="num1" placeholder="Número 1">
+        <input type="number" id="num2" placeholder="Número 2">
+        <button onclick="mayorNumero()">Comparar</button>
+        <p id="mayorNumeroResultado"></p>
+    </fieldset>
+
+    <!-- Ejercicio 3 -->
+    <fieldset>
+        <legend>3. Encontrar vocales en una frase</legend>
+        <input type="text" id="vocalesInput" placeholder="Escribe una frase">
+        <button onclick="encontrarVocales()">Encontrar vocales</button>
+        <p id="vocalesResultado"></p>
+    </fieldset>
+
+    <!-- Ejercicio 4 -->
+    <fieldset>
+        <legend>4. Contar vocales en una frase</legend>
+        <input type="text" id="contarVocalesInput" placeholder="Escribe una frase">
+        <button onclick="contarVocales()">Contar vocales</button>
+        <p id="contarVocalesResultado"></p>
+    </fieldset>
+    <fieldset>
+        <legend>Ejercicio AJAX</legend>
+
+        <!-- Cuadro de texto con la URL -->
+        <label for="urlInput">URL:</label>
+        <input type="text" id="urlInput" placeholder="Introduce una URL">
+
+        <!-- Botón para realizar la petición -->
+        <button onclick="mostrarContenidos()">Mostrar Contenidos</button>
+
+        <!-- Zona para mostrar los resultados -->
+        <div>
+            <h3>Contenidos</h3>
+            <pre id="contenidosRespuesta"></pre>
+        </div>
+        <div>
+            <h3>Estados de la petición</h3>
+            <p id="estadoPeticion">Estado: No iniciada</p>
+        </div>
+        <div>
+            <h3>Cabeceras HTTP de la respuesta</h3>
+            <pre id="cabecerasRespuesta"></pre>
+        </div>
+        <div>
+            <h3>Código de estado</h3>
+            <p id="codigoEstado">Código:</p>
+        </div>
+    </fieldset>
+</body>
+</html>

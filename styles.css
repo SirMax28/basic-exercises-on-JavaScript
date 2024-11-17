@@ -1,0 +1,110 @@
+/* Importar fuente desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Estilos globales */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0; /* Evitamos desplazamientos no deseados */
+    padding: 20px; /* Añade espacio interno en lugar de margen externo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Aseguramos que siempre llene la pantalla */
+    box-sizing: border-box; /* Garantiza que el padding no afecte las dimensiones */
+    color: #333;
+}
+
+h1 {
+    background: linear-gradient(90deg, #4d194d, #1a535c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;  
+  }
+
+/* Contenedor principal */
+fieldset {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de los legend */
+legend {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #444;
+}
+
+/* Encabezados */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    color: #555;
+}
+
+/* Cuadros de texto */
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #1a535c;
+}
+
+/* Botones */
+button {
+    padding: 10px 15px;
+    font-size: 1em;
+    color: white;
+    background-color: #4d194d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #006466;
+}
+
+/* Resultados */
+pre, p {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #4d194d;
+    border-radius: 5px;
+    margin: 10px 0;
+    white-space: pre-wrap;
+}
+
+p {
+    font-size: 1em;
+    color: #444;
+    line-height: 1.5em;
+}
